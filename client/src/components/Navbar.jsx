@@ -83,7 +83,7 @@ const Navbar = () => {
             {/* Mobile */}
             <div className='flex md:hidden items-center justify-between px-4 h-full'>
                 <h1 className='font-extrabold text-2xl'>brainFuel</h1>
-                <MobileNavbar />
+                <MobileNavbar user={user} logoutHandler={logoutHandler}/>
             </div>
 
         </div>
@@ -92,34 +92,35 @@ const Navbar = () => {
 
 export default Navbar
 
-const MobileNavbar = () => {
-    const role = "instructor";
+const MobileNavbar = ({user,logoutHandler}) => {
+
+    const navigate = useNavigate();
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button size='icon' className="rounded-full bg-gray-200 hover:bg-gray-300" variant="outline">
+                <Button size='icon' className="rounded-full hover:bg-gray-300" variant="outline">
                     <Menu />
                 </Button>
             </SheetTrigger>
             <SheetContent className="flex flex-col ">
                 <SheetHeader className="flex flex-row items-center justify-center gap-8 mt-4">
-                    <SheetTitle className="font-bold">brainFuel</SheetTitle>
+                    <SheetTitle className="font-bold" onClick={() => navigate("/")}>brainFuel</SheetTitle>
                     <DarkMode />
                 </SheetHeader>
                 <Separator className='mr-2' />
                 <nav className='flex flex-col space-y-4'>
-                    <span>My Learning</span>
-                    <span>Edit Profile</span>
-                    <div className='flex justify-between'>
+                    <Link to="my-learning">My Learning</Link>
+                    <Link to="profile">Edit Profile</Link>
+                    <div className='flex justify-between' onClick={() => logoutHandler}>
                         <p>Log out</p>
                         <LogOutIcon />
                     </div>
                 </nav>
                 {
-                    role === "instructor" && (
+                    user?.role === "instructor" && (
                         <SheetFooter>
                             <SheetClose asChild>
-                                <Button type="submit">Dashboard</Button>
+                                <Button type="submit" onClick={() => navigate("/admin/dashboard")}>Dashboard</Button>
                             </SheetClose>
                         </SheetFooter>
                     )

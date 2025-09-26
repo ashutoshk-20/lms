@@ -115,6 +115,38 @@ export const getCourseById = async (req, res) => {
     }
 }
 
+export const searchCourse = async (req,res) =>{
+    try {
+        const {query = "", categories = []} = req.query;
+
+        const searchCriteria = {
+            isPublished:true,
+            $or: [
+                {courseTitle: {$regex: query, $options:"i"}},
+                {subTitle: {$regex:query, $options:"i"}},
+                {category: {$regex:query, $options:"i"}},
+                {description: {$regex:query, $options:"i"}},
+            ]
+        }
+
+        // if categories are selected
+        if(categories.length > 0){
+            searchCriteria.category = {$in: categories};
+        }
+
+        let courses = await Course.find(searchCriteria).populate({path:"creator", select:"name imgUrl"});
+
+        return res.status(200).json({
+            success:true,
+            courses: courses || []
+        });
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 export const createLecture = async(req,res) =>{
     try {
         const {lectureTitle} = req.body;
@@ -345,7 +377,7 @@ export const getCourseDetail = async (req,res) => {
     try {
         const {courseId} = req.params;
         const course = await Course.findById(courseId).populate({path:"creator", select:"name"}).populate({path:"lectures"});
-    
+        
         if(!course){
             return res.status(404).json({
                 message:"Course not found"

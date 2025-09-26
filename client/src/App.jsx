@@ -17,6 +17,10 @@ import EditCourse from './pages/admin/course/EditCourse'
 import CreateLecture from './pages/admin/lecture/CreateLecture'
 import EditLecture from './pages/admin/lecture/EditLecture'
 import CourseInfo from './pages/student/CourseInfo'
+import CourseProgress from './pages/student/CourseProgress'
+import SearchPage from './pages/student/SearchPage'
+import { AdminRoute, AuthenticatedUser, ProtectedRoutes } from './components/ProtectedRoutes'
+import { ThemeProvider } from './components/ThemeProvider'
 
 const appRouter = createBrowserRouter([
   {
@@ -34,36 +38,54 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login />
+        element: <AuthenticatedUser> <Login /> </AuthenticatedUser>
       },
       {
         path: "my-learning",
         element: (
-          <>
+          <ProtectedRoutes>
             <MyLearning />
-          </>
+          </ProtectedRoutes>
         )
       },
       {
         path: "profile",
         element: (
-          <>
+          <ProtectedRoutes>
             <Profile />
+          </ProtectedRoutes>
+        )
+      },
+      {
+        path: "course/search",
+        element: (
+          <>
+            <SearchPage />
           </>
         )
       },
       {
-        path:"course-detail/:courseId",
-        element:(
+        path: "course-detail/:courseId",
+        element: (
           <>
-            <CourseInfo/>
+            <CourseInfo />
           </>
+        )
+      },
+      {
+        path: "course-progress/:courseId",
+        element: (
+          <ProtectedRoutes>
+            <CourseProgress />
+          </ProtectedRoutes>
         )
       },
       {
         path: "admin",
         element: (
-          <Sidebar />
+          <AdminRoute>
+            <Sidebar />
+          </AdminRoute>
         ),
         children: [
           {
@@ -89,19 +111,19 @@ const appRouter = createBrowserRouter([
             )
           },
           {
-            path:"course/:courseId/lecture",
+            path: "course/:courseId/lecture",
             element: (
-               <CreateLecture/>
+              <CreateLecture />
             )
           },
 
           {
-            path:"course/:courseId/lecture/:lectureId",
+            path: "course/:courseId/lecture/:lectureId",
             element: (
-               <EditLecture/>
+              <EditLecture />
             )
           },
-          
+
         ]
       }
 
@@ -114,7 +136,9 @@ function App() {
 
   return (
     <main>
-      <RouterProvider router={appRouter} />
+      <ThemeProvider>
+        <RouterProvider router={appRouter} />
+      </ThemeProvider>
     </main>
   )
 }
