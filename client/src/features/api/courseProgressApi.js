@@ -43,6 +43,13 @@ export const courseProgressApi = createApi({
                 method:"POST",
                 body: {question}
             })
+        }),
+
+        getDoubts: builder.query({
+            query: (courseId) => ({
+                url:`/${courseId}/doubts`,
+                method:"GET"
+            })
         })
     })
 })
@@ -52,5 +59,6 @@ export const {
     useUpdateLectureProgressMutation,
     useCompleteCourseMutation,
     useInCompleteCourseMutation,
-    useAddDoubtMutation
+    useAddDoubtMutation,
+    useGetDoubtsQuery
 } = courseProgressApi

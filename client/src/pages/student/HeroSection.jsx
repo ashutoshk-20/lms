@@ -24,7 +24,7 @@ const HeroSection = () => {
                 <Input
                     type="text"
                     className="flex-grow border-none focus-visible:ring-0 px-6 py-3 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
-                    placeholder="Browse through different cources"
+                    placeholder="Browse through different courses"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
 

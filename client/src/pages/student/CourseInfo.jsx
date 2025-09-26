@@ -14,7 +14,7 @@ const CourseInfo = () => {
   let enrollmentStatus = "unenrolled";
   const {data:userData} = useLoadUserQuery()
   const courseId = useParams().courseId;
-  const {data} = useGetCourseDetailQuery(courseId)
+  const {data, refetch} = useGetCourseDetailQuery(courseId)
   const [enrollCourse, {data:enrolledCourseData, isSuccess, error}] = useEnrollCourseMutation();
   const navigate=useNavigate();
   
@@ -31,6 +31,7 @@ const CourseInfo = () => {
         navigate("/login");
     }
     enrollCourse(courseId);
+    refetch();
   }
 
   const handleContinue = () => {
@@ -49,6 +50,7 @@ const CourseInfo = () => {
   useEffect(() => {
     if(isSuccess){
       toast.success("Course enrolled");
+      refetch();
     }
     if(error){
       toast.error(error.data.message || "Error in enrollment");
