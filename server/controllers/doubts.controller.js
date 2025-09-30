@@ -3,6 +3,7 @@ import Doubts from "../models/doubts.model.js";
 import axios from "axios";
 import mongoose from "mongoose";
 import striptags from "striptags"
+import "dotenv/config"
 
 export async function addDoubt(req, res) {
     const studentId = req.id;
@@ -28,7 +29,7 @@ export async function addDoubt(req, res) {
         );
 
         // 3. Send question + course context to n8n webhook
-        const response = await axios.post("https://ashutoshkhedkar.app.n8n.cloud/webhook-test/ef952197-8e4b-4f5c-941e-4462e466f3ba", {
+        const response = await axios.post(process.env.N8N_TEST_URL, {
             studentId,
             courseId,
             question,
