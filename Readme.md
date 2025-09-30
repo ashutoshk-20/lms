@@ -1,4 +1,4 @@
-``````md path="README.md"
+
 # LMS (Learning Management System)
 
 ## Overview
