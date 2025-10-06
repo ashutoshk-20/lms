@@ -101,6 +101,7 @@ const CourseProgress = () => {
                         </h3>
                     </div>
 
+
                     {/* <Separator className={'mt-4'} />
                     <div className='mt-4 space-y-3'>
                         <h1 className='font-bold text-lg md:text-xl'>Doubts</h1>
