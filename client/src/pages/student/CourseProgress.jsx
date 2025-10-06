@@ -101,7 +101,7 @@ const CourseProgress = () => {
                         </h3>
                     </div>
 
-                    <Separator className={'mt-4'} />
+                    {/* <Separator className={'mt-4'} />
                     <div className='mt-4 space-y-3'>
                         <h1 className='font-bold text-lg md:text-xl'>Doubts</h1>
                         <div>
@@ -143,7 +143,7 @@ const CourseProgress = () => {
                             </Button>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="flex flex-col w-full md:w-2/5 border-t md:border-t-0 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0" >
