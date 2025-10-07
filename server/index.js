@@ -24,6 +24,9 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/progress",courseProgressRoute);
 
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'OK', Message: 'Server is running' });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
