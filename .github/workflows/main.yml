@@ -71,3 +71,7 @@ jobs:
         run: |
           sudo rm -rf /var/www/html/*
           sudo cp -r ./client/dist/* /var/www/html/
+
+      - name: Reload Nginx
+        run: sudo systemctl reload nginx
+
