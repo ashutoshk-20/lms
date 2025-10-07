@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: '*',
     credentials: true,
 }))
 
@@ -23,10 +23,6 @@ app.use('/api/v1/media',mediaRoute)
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/progress",courseProgressRoute);
-
-app.get('/api/health', (req, res) => {
-    res.status(200).json({ status: 'OK', Message: 'Server is running' });
-});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

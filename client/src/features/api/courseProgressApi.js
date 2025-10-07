@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-const COURSE_PROGRESS_API = "http://localhost:8000/api/v1/progress"
+const BASE_URL = import.meta.env.VITE_REACT_API_URL || "http://localhost:8000/api"
+const COURSE_PROGRESS_API = BASE_URL + "/v1/progress"
 
 export const courseProgressApi = createApi({
     reducerPath: "courseProgressApi",
